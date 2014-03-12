@@ -20,10 +20,13 @@ import org.opencv.core.*;
 import org.opencv.features2d.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.android.Utils;
+import org.opencv.imgproc.Imgproc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
     public static final int SUBSAMPLING_FACTOR = 4;
@@ -70,24 +73,45 @@ public class MainActivity extends ActionBarActivity {
 
 
    private Bitmap doImages() {
-            FeatureDetector orb = FeatureDetector.create(FeatureDetector.ORB);
-            Mat large=new Mat();
+            FeatureDetector orbf = FeatureDetector.create(FeatureDetector.ORB);
+       DescriptorExtractor orbd = DescriptorExtractor.create(DescriptorExtractor.ORB);
+            Mat key=new Mat();
+            Mat example=new Mat();
             try {
-                large = Utils.loadResource(this,R.drawable.key);
-                Log.e("ImageMatch", "ImageLoaded");
+                key = Utils.loadResource(this,R.drawable.key);
+                example = Utils.loadResource(this,R.drawable.example);
+                Log.e("ImageMatch", "Images loaded");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-       Log.e("ImageMatch", "MatrixSetup");
-            MatOfKeyPoint kp =new MatOfKeyPoint();
-       orb.detect(large,kp);
-       Features2d.drawKeypoints(large,kp,large);
-       Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-       Bitmap bmp = Bitmap.createBitmap(large.width(), large.height(), conf); // this creates a MUTABLE bitmap
-       Utils.matToBitmap(large,bmp);
-       Log.e("ImageMatch",Integer.toString(bmp.getByteCount()));
+       MatOfKeyPoint kpkey =new MatOfKeyPoint();
+       Mat desckey=new Mat();
+       orbf.detect(key,kpkey);
+       orbd.compute(key, kpkey, desckey);
+
+       MatOfKeyPoint kpexample =new MatOfKeyPoint();
+       Mat descexample=new Mat();
+       orbf.detect(example,kpexample);
+       orbd.compute(example, kpexample, descexample);
+
+       DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+       List<MatOfDMatch> matches=new ArrayList<MatOfDMatch>();
+       matcher.knnMatch(descexample, desckey, matches, 10);
+
+       Mat out=new Mat();
+       Features2d.drawMatches2(example,kpexample,key,kpkey,matches,out);
+       Imgproc.resize(out, out, new Size(), 0.25, 0.25, Imgproc.INTER_AREA);
+       double angle = 90;  // or 270
+       Size src_sz = out.size();
+       int len = out.cols()>out.rows() ? out.cols() : out.rows();
+       Mat rot_mat = Imgproc.getRotationMatrix2D(new Point(len/2, len/2), angle, 1.0);
+       Imgproc.warpAffine(out, out, rot_mat, new Size(out.height(),out.width()));
+       Log.e("WIDTH",Integer.toString(out.width()));
+       Log.e("HEIGHT",Integer.toString(out.height()));
+       Bitmap.Config conf = Bitmap.Config.ARGB_8888 ; // see other conf types
+       Bitmap bmp = Bitmap.createBitmap(out.width(),out.height(),conf);
+       Utils.matToBitmap(out, bmp);
        return bmp;
-//TODO: Implement matching!
         }
 
 
