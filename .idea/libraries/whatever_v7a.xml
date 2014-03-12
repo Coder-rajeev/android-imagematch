@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="whatever-v7a">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ImageMatcher/libs/whatever-v7a.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: javacpp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ImageMatcher/libs/javacpp.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/home/sam/Coding/androidstudio/ImageMatcher/ImageMatcher/libs/OpenCV/assets" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/home/sam/Coding/androidstudio/ImageMatcher/ImageMatcher/libs/OpenCV/src/release/assets" />
+    </dataSet>
+
+</merger>

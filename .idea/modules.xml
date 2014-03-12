@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ImageMatcher.iml" filepath="$PROJECT_DIR$/ImageMatcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImageMatcher/ImageMatcher-ImageMatcher.iml" filepath="$PROJECT_DIR$/ImageMatcher/ImageMatcher-ImageMatcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenCV/OpenCV.iml" filepath="$PROJECT_DIR$/OpenCV/OpenCV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImageMatcher/libs/libs.iml" filepath="$PROJECT_DIR$/ImageMatcher/libs/libs.iml" />
+    </modules>
+  </component>
+</project>
+

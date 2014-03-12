@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: opencv-v7a">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ImageMatcher/libs/opencv-v7a.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
